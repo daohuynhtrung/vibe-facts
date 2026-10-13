@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { RotateCcw, Heart, Trophy, Sparkles, Globe } from 'lucide-react';
+import { RotateCcw, Heart, Trophy, Globe, Layers } from 'lucide-react';
 import { Language } from '../types/card';
 import { sound } from '../utils/audio';
 
@@ -11,6 +11,7 @@ interface DeckCompletedProps {
   likedCount: number;
   language: Language;
   onRestart: () => void;
+  onAddMoreCards: () => void;
   onOpenLiveFact: () => void;
 }
 
@@ -19,6 +20,7 @@ export const DeckCompleted: React.FC<DeckCompletedProps> = ({
   likedCount,
   language,
   onRestart,
+  onAddMoreCards,
   onOpenLiveFact,
 }) => {
   useEffect(() => {
@@ -62,12 +64,12 @@ export const DeckCompleted: React.FC<DeckCompletedProps> = ({
 
       <div className="space-y-2">
         <h2 className="text-2xl font-black text-white tracking-tight">
-          {isVi ? 'Hoàn Thành Bộ Bài 52 Lá!' : 'Deck Completed!'}
+          {isVi ? `Hoàn Thành ${totalCards} Lá Bài!` : `Completed ${totalCards} Cards!`}
         </h2>
         <p className="text-sm text-slate-400">
           {isVi
-            ? 'Bạn đã khám phá trọn vẹn 52 sự thật kỳ thú từ vũ trụ, thiên nhiên đến văn hóa.'
-            : 'You unlocked all 52 facts spanning deep cosmos, creatures, history, and science.'}
+            ? 'Bạn đã khám phá trọn vẹn bộ bài này. Hãy rút thêm 52 sự thật mới để tiếp tục hành trình!'
+            : 'You unlocked this entire deck. Deal 52 brand new cards to continue your exploration!'}
         </p>
       </div>
 
@@ -93,24 +95,41 @@ export const DeckCompleted: React.FC<DeckCompletedProps> = ({
 
       {/* Action Buttons */}
       <div className="space-y-2.5 pt-2">
+        {/* PRIMARY ACTION: Add 52 new cards & continue scrolling! */}
+        <button
+          type="button"
+          onClick={() => {
+            sound.playShuffle();
+            onAddMoreCards();
+          }}
+          className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 hover:opacity-95 active:scale-[0.98] transition-all text-white font-black text-sm flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/25 border border-emerald-400/30"
+        >
+          <Layers className="w-5 h-5 text-white stroke-[2.5]" />
+          <span>
+            {isVi
+              ? '🃏 Thêm 52 Lá Mới & Lướt Tiếp'
+              : '🃏 Add 52 New Cards & Continue'}
+          </span>
+        </button>
+
         <button
           type="button"
           onClick={() => {
             sound.playShuffle();
             onRestart();
           }}
-          className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 hover:opacity-95 active:scale-[0.98] transition-all text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
+          className="w-full py-3 px-4 rounded-2xl bg-slate-800/90 hover:bg-slate-700/80 active:scale-[0.98] transition-all text-slate-200 font-bold text-xs flex items-center justify-center gap-2 border border-slate-700/80"
         >
-          <RotateCcw className="w-4 h-4 text-slate-950 stroke-[2.5]" />
-          <span>{isVi ? 'Xào Bài & Chơi Lại' : 'Shuffle & Deal Again'}</span>
+          <RotateCcw className="w-4 h-4 text-slate-300 stroke-[2.5]" />
+          <span>{isVi ? 'Xào Lại Từ Đầu' : 'Shuffle & Restart'}</span>
         </button>
 
         <button
           type="button"
           onClick={onOpenLiveFact}
-          className="w-full py-3 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700/80 active:scale-[0.98] transition-all text-slate-200 font-semibold text-xs flex items-center justify-center gap-2 border border-slate-700"
+          className="w-full py-2.5 px-4 rounded-2xl bg-slate-800/50 hover:bg-slate-700/60 active:scale-[0.98] transition-all text-slate-400 hover:text-slate-200 font-semibold text-xs flex items-center justify-center gap-2 border border-slate-800"
         >
-          <Globe className="w-4 h-4 text-indigo-400" />
+          <Globe className="w-3.5 h-3.5 text-indigo-400" />
           <span>{isVi ? 'Khám Phá Fact Live Từ API' : 'Draw Live API Fact'}</span>
         </button>
       </div>

@@ -1317,3 +1317,23 @@ export const DECK_OF_52_FACTS: FactCard[] = [
     }
   }
 ];
+
+import { DECK_2_OF_52_FACTS } from './deck2';
+
+export function getNext52Cards(currentCount: number): FactCard[] {
+  const deckCycle = Math.floor(currentCount / 52) + 1;
+
+  if (deckCycle === 2) {
+    return DECK_2_OF_52_FACTS;
+  }
+
+  // For further decks (Deck 3, 4...), create fresh shuffled permutations with sequential card numbering
+  const basePool = [...DECK_OF_52_FACTS, ...DECK_2_OF_52_FACTS];
+  const shuffled = [...basePool].sort(() => Math.random() - 0.5).slice(0, 52);
+
+  return shuffled.map((card, idx) => ({
+    ...card,
+    id: `deck${deckCycle}-${card.id}-${Date.now()}-${idx}`,
+    cardNumber: currentCount + idx + 1,
+  }));
+}

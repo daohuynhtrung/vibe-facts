@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
-import { DECK_OF_52_FACTS } from '../data/facts';
+import { DECK_OF_52_FACTS, getNext52Cards } from '../data/facts';
 import { FactCard, Language } from '../types/card';
 import { CardItem } from './CardItem';
 import { TopBar } from './TopBar';
@@ -95,6 +95,14 @@ export const DeckContainer: React.FC = () => {
     setHistory([]);
   };
 
+  const handleAddMoreCards = () => {
+    sound.playShuffle();
+    const next52 = getNext52Cards(deck.length);
+    setDeck((prev) => [...prev, ...next52]);
+    // currentIndex remains at the index of the first new card,
+    // so isCompleted becomes false and the user continues scrolling!
+  };
+
   const handleToggleLike = (cardId: string) => {
     setLikedCardIds((prev) => {
       const updated = new Set(prev);
@@ -139,6 +147,7 @@ export const DeckContainer: React.FC = () => {
                 likedCount={likedCardIds.size}
                 language={language}
                 onRestart={handleShuffle}
+                onAddMoreCards={handleAddMoreCards}
                 onOpenLiveFact={() => setIsLiveModalOpen(true)}
               />
             </div>
