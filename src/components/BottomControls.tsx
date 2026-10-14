@@ -46,7 +46,12 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
   // ----------------------------------------------------
   if (isReviewMode) {
     return (
-      <div className="w-full max-w-sm mx-auto px-4 py-2.5 z-40 flex flex-col items-center gap-2">
+      <div
+        className="w-full max-w-sm mx-auto px-4 py-2 z-40 flex flex-col items-center gap-1.5 transition-all"
+        style={{
+          paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))',
+        }}
+      >
         <div className="flex items-center justify-center gap-4">
           {/* Previous Card */}
           <button
@@ -101,7 +106,12 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
   // ----------------------------------------------------
   if (isDiscerning) {
     return (
-      <div className="w-full max-w-sm mx-auto px-4 py-2.5 z-40 flex flex-col items-center gap-2">
+      <div
+        className="w-full max-w-sm mx-auto px-4 py-2 z-40 flex flex-col items-center gap-1.5 transition-all"
+        style={{
+          paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))',
+        }}
+      >
         <div className="flex items-center justify-center gap-4 sm:gap-6">
           {/* Disagree / FAKE Button */}
           <button
@@ -162,7 +172,12 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
   // STANDARD EXPLORE MODE CONTROLS
   // ----------------------------------------------------
   return (
-    <div className="w-full max-w-sm mx-auto px-4 py-3 z-40 flex flex-col items-center gap-2">
+    <div
+      className="w-full max-w-sm mx-auto px-4 py-2 z-40 flex flex-col items-center gap-1.5 transition-all"
+      style={{
+        paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))',
+      }}
+    >
       <div className="flex items-center justify-center gap-4 sm:gap-6">
         {/* Undo Previous Card Button */}
         <button

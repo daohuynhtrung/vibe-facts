@@ -234,8 +234,8 @@ export const DeckContainer: React.FC = () => {
       />
 
       {/* Main Playing Cards Arena */}
-      <main className="flex-1 flex items-center justify-center px-4 py-1 sm:py-2 relative z-20">
-        <div className="relative w-full max-w-[380px] h-[520px] max-h-[72dvh]">
+      <main className="flex-1 flex items-center justify-center px-4 py-0.5 sm:py-2 relative z-20">
+        <div className="relative w-full max-w-[380px] h-[485px] sm:h-[515px] max-h-[64dvh]">
           
           {/* ========================================== */}
           {/* 1. DISCERNING MODE */}

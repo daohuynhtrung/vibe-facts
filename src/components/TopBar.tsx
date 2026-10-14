@@ -38,7 +38,12 @@ export const TopBar: React.FC<TopBarProps> = ({
   const progressPercent = Math.min(Math.round(((currentIndex) / totalCards) * 100), 100);
 
   return (
-    <header className="w-full max-w-md mx-auto pt-2.5 px-3.5 pb-2 flex flex-col gap-2 z-40">
+    <header
+      className="w-full max-w-md mx-auto px-3.5 pb-2 flex flex-col gap-2 z-40 transition-all"
+      style={{
+        paddingTop: 'max(0.75rem, calc(env(safe-area-inset-top, 0px) + 0.375rem))',
+      }}
+    >
       {/* Top Row: Brand & Settings Controls */}
       <div className="flex items-center justify-between">
         
@@ -75,14 +80,14 @@ export const TopBar: React.FC<TopBarProps> = ({
         </div>
 
         {/* Right Actions: Sound, Shuffle, Live, Language */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           {/* Live Fact API button */}
           {!isReviewMode && (
             <button
               type="button"
               onClick={onOpenLiveFact}
               title={isVi ? 'Fact trực tiếp' : 'Live API Fact'}
-              className="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-white transition-all active:scale-95 flex items-center gap-1 text-xs"
+              className="h-8 px-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-white transition-all active:scale-95 flex items-center gap-1 text-xs"
             >
               <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
               <span className="hidden xs:inline text-[10px] font-semibold">Live</span>
@@ -98,7 +103,7 @@ export const TopBar: React.FC<TopBarProps> = ({
                 onShuffle();
               }}
               title={isVi ? 'Xào lại bài' : 'Shuffle Deck'}
-              className="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-white transition-all active:scale-95"
+              className="w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-white transition-all active:scale-95 flex items-center justify-center"
             >
               <Shuffle className="w-3.5 h-3.5" />
             </button>
@@ -109,7 +114,7 @@ export const TopBar: React.FC<TopBarProps> = ({
             type="button"
             onClick={onToggleSound}
             title={soundEnabled ? 'Mute sound' : 'Enable sound'}
-            className={`p-1.5 rounded-xl border transition-all active:scale-95 ${
+            className={`w-8 h-8 rounded-xl border transition-all active:scale-95 flex items-center justify-center ${
               soundEnabled
                 ? 'bg-slate-800/80 border-slate-700 text-amber-400'
                 : 'bg-slate-800/40 border-slate-800 text-slate-500'
@@ -119,11 +124,11 @@ export const TopBar: React.FC<TopBarProps> = ({
           </button>
 
           {/* Language Switcher */}
-          <div className="flex items-center rounded-xl bg-slate-800/90 border border-slate-700 p-0.5 text-xs font-bold">
+          <div className="flex items-center h-8 rounded-xl bg-slate-800/90 border border-slate-700 p-0.5 text-xs font-bold">
             <button
               type="button"
               onClick={() => onLanguageChange('en')}
-              className={`px-1.5 py-0.5 rounded-lg transition-all text-[11px] ${
+              className={`h-full px-2 rounded-lg transition-all text-[11px] flex items-center justify-center ${
                 language === 'en'
                   ? 'bg-amber-500 text-slate-950 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
@@ -134,7 +139,7 @@ export const TopBar: React.FC<TopBarProps> = ({
             <button
               type="button"
               onClick={() => onLanguageChange('vi')}
-              className={`px-1.5 py-0.5 rounded-lg transition-all text-[11px] ${
+              className={`h-full px-2 rounded-lg transition-all text-[11px] flex items-center justify-center ${
                 language === 'vi'
                   ? 'bg-rose-500 text-white shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'

@@ -173,7 +173,12 @@ export const LiveFactModal: React.FC<LiveFactModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 border-t border-slate-800/80 bg-slate-950/40 flex gap-2.5">
+        <div
+          className="p-4 border-t border-slate-800/80 bg-slate-950/40 flex gap-2.5"
+          style={{
+            paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))',
+          }}
+        >
           <button
             type="button"
             onClick={fetchFact}
